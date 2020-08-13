@@ -5,7 +5,7 @@
 
 @if (SignInManager.IsSignedIn(User)) {
     <li class="nav-item">
-        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @((await UserManager.GetUserAsync(User)).FirstName)!</a>
+        <a class="nav-link" asp-controller="Admin" asp-action="Index">Hello @((await UserManager.GetUserAsync(User)).FirstName)!</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" onclick="$('#LogoutForm').submit();" style="cursor: pointer;">Logout</a>

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuiqBlog.Data\QuiqBlog.Data.csproj" />
+    <ProjectReference Include="..\QuiqBlog.Service\QuiqBlog.Service.csproj" />
   </ItemGroup>
 
 </Project>
