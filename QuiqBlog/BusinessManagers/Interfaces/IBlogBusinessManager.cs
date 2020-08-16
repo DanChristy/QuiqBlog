@@ -6,5 +6,7 @@ using System.Threading.Tasks;
 namespace QuiqBlog.BusinessManagers.Interfaces {
     public interface IBlogBusinessManager {
         Task<Blog> CreateBlog(CreateBlogViewModel createBlogViewModel, ClaimsPrincipal claimsPrincipal);
+        Task<Blog> UpdateBlog(EditViewModel editViewModel, ClaimsPrincipal claimsPrincipal);
+        EditViewModel EditBlog(int blogId);
     }
 }
