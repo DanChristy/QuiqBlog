@@ -2,13 +2,16 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PagedList.Core;
 using QuiqBlog.Authorization;
 using QuiqBlog.BusinessManagers.Interfaces;
 using QuiqBlog.Data.Models;
 using QuiqBlog.Models.BlogViewModels;
+using QuiqBlog.Models.HomeViewModels;
 using QuiqBlog.Service.Interfaces;
 using System;
 using System.IO;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -28,6 +31,19 @@ namespace QuiqBlog.BusinessManagers {
             this.blogService = blogService;
             this.webHostEnvironment = webHostEnvironment;
             this.authorizationService = authorizationService;
+        }
+
+        public IndexViewModel GetIndexViewModel(string searchString, int? page) {
+            int pageSize = 2;
+            int pageNumber = page ?? 1;
+            var blogs = blogService.GetBlogs(searchString ?? string.Empty)
+                .Where(blog => blog.Published);
+
+            return new IndexViewModel {
+                Blogs = new StaticPagedList<Blog>(blogs.Skip((pageNumber - 1) * pageSize).Take(pageSize), pageNumber, pageSize, blogs.Count()),
+                SearchString = searchString,
+                PageNumber = pageNumber
+            };
         }
 
         public async Task<Blog> CreateBlog(CreateViewModel createViewModel, ClaimsPrincipal claimsPrincipal) {

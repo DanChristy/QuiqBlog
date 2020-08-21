@@ -4,6 +4,10 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/master/LICENSE)
  */
 
+.content {
+    min-height: calc(100vh - 100px);
+}
+
 body {
   font-size: 20px;
   color: #212529;
