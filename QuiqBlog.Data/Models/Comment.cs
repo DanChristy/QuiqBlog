@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace QuiqBlog.Data.Models {
     public class Comment {
@@ -9,5 +10,6 @@ namespace QuiqBlog.Data.Models {
         public string Content { get; set; }
         public Comment Parent { get; set; }
         public DateTime CreatedOn { get; set; }
+        public virtual IEnumerable<Comment> Comments { get; set; }
     }
 }
