@@ -1,10 +1,11 @@
 ﻿@model QuiqBlog.Models.PostViewModels.PostViewModel
 @{
-    Layout = "_ReadLayout";
+    Layout = "_HomeLayout";
     ViewData["HeaderImage"] = $"../../UserFiles/Posts/{Model.Post.Id}/HeaderImage.jpg";
     ViewData["HeaderTitle"] = Model.Post.Title;
     ViewData["AuthorName"] = $"{Model.Post.Creator.FirstName} {Model.Post.Creator.LastName}";
     ViewData["PostDate"] = Model.Post.UpdatedOn.ToString("MMMM d, yyyy");
+    ViewData["AuthorId"] = Model.Post.Creator.Id;
 }
 
 <article>

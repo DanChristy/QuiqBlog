@@ -36,6 +36,7 @@ namespace QuiqBlog.BusinessManagers {
         public async Task<AboutViewModel> GetAboutViewModel(ClaimsPrincipal claimsPrincipal) {
             var applicationUser = await userManager.GetUserAsync(claimsPrincipal);
             return new AboutViewModel {
+                ApplicationUser = applicationUser,
                 SubHeader = applicationUser.SubHeader,
                 Content = applicationUser.AboutContent
             };

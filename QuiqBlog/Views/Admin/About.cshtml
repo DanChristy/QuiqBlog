@@ -32,6 +32,7 @@
                     <div class="card-footer">
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">Submit</button>
+                            <a asp-controller="Home" asp-action="Author" asp-route-authorId="@Model.ApplicationUser.Id" class="btn btn-secondary float-right">View</a>
                         </div>
                     </div>
                 </form>

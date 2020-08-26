@@ -1,6 +1,7 @@
 ﻿using QuiqBlog.Data;
 using QuiqBlog.Data.Models;
 using QuiqBlog.Service.Interfaces;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace QuiqBlog.Service {
@@ -9,6 +10,11 @@ namespace QuiqBlog.Service {
 
         public UserService(ApplicationDbContext applicationDbContext) {
             this.applicationDbContext = applicationDbContext;
+        }
+
+        public ApplicationUser Get(string id) {
+            return applicationDbContext.Users
+                .FirstOrDefault(user => user.Id == id);
         }
 
         public async Task<ApplicationUser> Update(ApplicationUser applicationUser) {

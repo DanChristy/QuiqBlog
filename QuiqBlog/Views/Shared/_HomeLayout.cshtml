@@ -33,11 +33,15 @@
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="post-heading">
                         <h1>@ViewData["HeaderTitle"]</h1>
-                        <span class="meta">
-                            Posted by
-                            <a href="#">@ViewData["AuthorName"]</a>
-                            on @ViewData["PostDate"]
-                        </span>
+                        @if (ViewData["SubHeader"] is null) {
+                            <span class="meta">
+                                Posted by
+                                <a asp-controller="Home" asp-action="Author" asp-route-authorId="@ViewData["AuthorId"]">@ViewData["AuthorName"]</a>
+                                on @ViewData["PostDate"]
+                            </span>
+                        } else {
+                            <span class="subheading">@ViewData["SubHeader"]</span>
+                        }
                     </div>
                 </div>
             </div>
