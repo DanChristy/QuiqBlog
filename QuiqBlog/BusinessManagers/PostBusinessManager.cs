@@ -89,6 +89,28 @@ namespace QuiqBlog.BusinessManagers {
             return post;
         }
 
+        public async Task<ActionResult<Comment>> CreateComment(PostViewModel postViewModel, ClaimsPrincipal claimsPrincipal) {
+            if (postViewModel.Post is null || postViewModel.Post.Id == 0)
+                return new BadRequestResult();
+
+            var post = postService.GetPost(postViewModel.Post.Id);
+
+            if (post is null)
+                return new NotFoundResult();
+
+            var comment = postViewModel.Comment;
+
+            comment.Author = await userManager.GetUserAsync(claimsPrincipal);
+            comment.Post = post;
+            comment.CreatedOn = DateTime.Now;
+
+            if (comment.Parent != null) {
+                comment.Parent = postService.GetComment(comment.Parent.Id);
+            }
+
+            return await postService.Add(comment);
+        }
+
         public async Task<ActionResult<EditViewModel>> UpdatePost(EditViewModel editViewModel, ClaimsPrincipal claimsPrincipal) {
             var post = postService.GetPost(editViewModel.Post.Id);
 
