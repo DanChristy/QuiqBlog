@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using QuiqBlog.Authorization;
 using QuiqBlog.BusinessManagers;
 using QuiqBlog.BusinessManagers.Interfaces;
 using QuiqBlog.Data;
@@ -25,10 +27,16 @@ namespace QuiqBlog.Configuration {
         }
 
         public static void AddCustomServices(this IServiceCollection serviceCollection) {
-            serviceCollection.AddScoped<IBlogBusinessManager, BlogBusinessManager>();
+            serviceCollection.AddScoped<IPostBusinessManager, PostBusinessManager>();
             serviceCollection.AddScoped<IAdminBusinessManager, AdminBusinessManager>();
+            serviceCollection.AddScoped<IHomeBusinessManager, HomeBusinessManager>();
 
-            serviceCollection.AddScoped<IBlogService, BlogService>();
+            serviceCollection.AddScoped<IPostService, PostService>();
+            serviceCollection.AddScoped<IUserService, UserService>();
+        }
+
+        public static void AddCustomAuthorization(this IServiceCollection serviceCollection) {
+            serviceCollection.AddTransient<IAuthorizationHandler, PostAuthorizationHandler>();
         }
     }
 }

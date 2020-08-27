@@ -5,36 +5,36 @@
         <li class="breadcrumb-item active">Dashboard</li>
     </ol>
     <div class="row">
-        @foreach (var blog in Model.Blogs) {
+        @foreach (var post in Model.Posts) {
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-0 shadow">
-                    <img src="~/UserFiles//Blogs/@blog.Id/HeaderImage.jpg" class="card-img-top" />
+                    <img src="~/UserFiles/Posts/@post.Id/HeaderImage.jpg" class="card-img-top">
                     <div class="card-body">
                         <div class="row" style="margin: 0px auto 10px 0px;">
-                            <div><h5 class="card-title" mb-0">@blog.Title</h5></div>
+                            <div><h5 class="card-title mb-0">@post.Title</h5></div>
                             <div class="ml-auto mr-3">
-                                <i class="fas @(blog.Published ? "fa-eye" : "fa-eye-slash")" style="color: @(blog.Published ? "deepskyblue" : "orangered")"></i>
+                                <i class="fas @(post.Published ? "fa-eye" : "fa-eye-slash")" style="color: @(post.Published ? "deepskyblue" : "orangered")"></i>
                             </div>
                         </div>
                         <div class="row ml-0">
                             <div><i class="fas fa-calendar-alt" style="color: gray"></i></div>
-                            <p class="text-muted ml-3 mb-0">Last updated on: @blog.UpdatedOn.ToString()</p>
+                            <p class="text-muted ml-3 mb-0">Last updated on: @post.UpdatedOn.ToString()</p>
                         </div>
                         <div class="row ml-0" style="bottom: 0;">
                             <div><i class="fas fa-comment" style="color: gray"></i></div>
-                            <p class="text-muted ml-3 mb-0">@blog.Posts.Count() comments</p>
+                            <p class="text-muted ml-3 mb-0">@post.Comments.Count() comments</p>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col">
-                                <a asp-controller="Home" asp-action="Blog" asp-route-id="@blog.Id" class="btn btn-primary">
+                                <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id" class="btn btn-primary">
                                     <i class="fa fa-arrow-circle-right"></i> View
                                 </a>
                             </div>
                             <div class="col">
-                                <a asp-controller="Blog" asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-secondary float-right">
-                                    <i class="fa fa-edit"></i> Edit
+                                <a asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-secondary float-right">
+                                    <i class=" fa fa-edit"></i> Edit
                                 </a>
                             </div>
                         </div>

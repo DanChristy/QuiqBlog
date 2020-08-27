@@ -1,74 +1,30 @@
-﻿    <!-- Main Content -->
+﻿@model QuiqBlog.Models.HomeViewModels.IndexViewModel
+@using PagedList.Core.Mvc
+
 <div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">
-                        Man must explore, and this is exploration at its greatest
-                    </h2>
-                    <h3 class="post-subtitle">
-                        Problems look mighty small from 150 miles up
-                    </h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#">Start Bootstrap</a>
-                    on September 24, 2019
-                </p>
-            </div>
-            <hr>
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">
-                        I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-                    </h2>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#">Start Bootstrap</a>
-                    on September 18, 2019
-                </p>
-            </div>
-            <hr>
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">
-                        Science has not yet mastered prophecy
-                    </h2>
-                    <h3 class="post-subtitle">
-                        We predict too much for the next year and yet far too little for the next ten.
-                    </h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#">Start Bootstrap</a>
-                    on August 24, 2019
-                </p>
-            </div>
-            <hr>
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">
-                        Failure is not an option
-                    </h2>
-                    <h3 class="post-subtitle">
-                        Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                    </h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#">Start Bootstrap</a>
-                    on July 8, 2019
-                </p>
-            </div>
-            <hr>
-            <!-- Pager -->
-            <div class="clearfix">
-                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+    <form asp-controller="Home" asp-action="Index" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group mb-3">
+            <input asp-for="SearchString" type="text" class="form-control" placeholder="Search posts for..." />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" style="padding: 0 10px 0 10px">Search</button>
             </div>
         </div>
+    </form>
+    <div class="row align-content-center">
+        @foreach (var post in Model.Posts) {
+            <div class="col-lg-4 col-md-3 mb-4">
+                <div class="card border-0 shadow">
+                    <img src="~/UserFiles/Posts/@post.Id/HeaderImage.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <div class="row text-center" style="margin: 0px auto 10px 0px;">
+                            <h5 class="card-title text-center w-100"><a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div list="@Model.Posts" count="20">
+        <pager class="pager-container" list="@Model.Posts" options="@PagedListRenderOptions.Bootstrap4PageNumbersPlusPrevAndNext" asp-action="Index" asp-controller="Home" asp-route-query="@Model.SearchString" />
     </div>
 </div>
-
-<hr>
