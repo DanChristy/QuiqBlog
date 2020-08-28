@@ -6,10 +6,10 @@ namespace QuiqBlog.Configuration {
     public static class AppConfiguration {
         public static void AddDefaultConfiguration(this IApplicationBuilder applicationBuilder, IWebHostEnvironment webHostEnvironment) {
             if (webHostEnvironment.IsDevelopment()) {
-                applicationBuilder.UseDeveloperExceptionPage();
                 applicationBuilder.UseDatabaseErrorPage();
             } else {
-                applicationBuilder.UseExceptionHandler("/Home/Error");
+                applicationBuilder.UseDeveloperExceptionPage();
+                //applicationBuilder.UseExceptionHandler("/Home/Error");
                 applicationBuilder.UseHsts();
             }
             applicationBuilder.UseHttpsRedirection();
