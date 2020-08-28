@@ -13,6 +13,7 @@ namespace QuiqBlog.Controllers {
             this.homeBusinessManager = homeBusinessManager;
         }
 
+        [Route("/")]
         public IActionResult Index(string searchString, int? page) {
             return View(postBusinessManager.GetIndexViewModel(searchString, page));
         }
