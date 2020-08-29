@@ -7,12 +7,15 @@
     ViewData["PostDate"] = Model.Post.UpdatedOn.ToString("MMMM d, yyyy");
     ViewData["AuthorId"] = Model.Post.Creator.Id;
 }
+@using System.Web
+@section Styles{
 
+}
 <article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                @Html.Raw(Model.Post.Content)
+            <div class="col-lg-8 col-md-10 mx-auto testing">
+                @Html.Raw(HttpUtility.HtmlDecode(Model.Post.Content))
             </div>
         </div>
         <div class="row mt-5">
