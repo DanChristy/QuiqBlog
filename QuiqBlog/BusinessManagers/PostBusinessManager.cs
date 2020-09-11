@@ -37,7 +37,7 @@ namespace QuiqBlog.BusinessManagers {
             int pageSize = 20;
             int pageNumber = page ?? 1;
             var posts = postService.GetPosts(searchString ?? string.Empty)
-                .Where(post => post.Published);
+                .Where(post => post.Published && post.Approved);
 
             return new IndexViewModel {
                 Posts = new StaticPagedList<Post>(posts.Skip((pageNumber - 1) * pageSize).Take(pageSize), pageNumber, pageSize, posts.Count()),

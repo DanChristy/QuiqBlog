@@ -31,7 +31,7 @@ namespace QuiqBlog.BusinessManagers {
             int pageNumber = page ?? 1;
 
             var posts = postService.GetPosts(searchString ?? string.Empty)
-                .Where(post => post.Published && post.Creator == applicationUser);
+                .Where(post => post.Published && post.Creator == applicationUser && post.Approved);
 
             return new AuthorViewModel {
                 Author = applicationUser,
